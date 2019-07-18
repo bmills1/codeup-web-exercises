@@ -9,49 +9,58 @@
 Below is an example of using the Request Inspector.
 -->
 
-    <form method="POST" action="https://www.elformo.com/forms/159f5c8c-a78d-47b7-91a8-334abf20c87e
-
-    ">
-        <h1>Register With Us!</h1>  <!--
-        Create text fields for email and password with appropriate placeholder values.
-    -->
-        <label for="email">Email Address:</label>
-        <input id="email" type="email" name="email" placeholder="Email">
-        <br>
-        <label for="password">Password:</label>
-        <input id="password" type="password" name="password" placeholder="Password">
-        <br>
-        <input type="submit">
-        <br><!--
+<form method="POST" action="https://www.elformo.com/forms/159f5c8c-a78d-47b7-91a8-334abf20c87e">
+    <h1>Register With Us!</h1>
+    <!--
+    Create text fields for email and password with appropriate placeholder values.
+-->
+    <label for="email">Email Address:</label>
+    <input id="email" type="email" name="email" placeholder="Email">
+    <br>
+    <label for="password">Password:</label>
+    <input id="password" type="password" name="password" placeholder="Password">
+    <br>
+    <input type="submit">
+    <br><!--
         Create a textarea named "bio". This is for the user to fill out a short description of themselves.
         -->
-        <label for="bio">Bio</label>
-        <br>
-        <textarea id="bio" name="bio" col="40" rows="10"></textarea>    <!--
+    <label for="bio">Bio</label>
+    <br>
+    <textarea id="bio" name="bio" col="40" rows="10"></textarea>    <!--
         Create a "How did you hear about us" section that contains radio buttons. The values should be "billboard", "radio                  advertisement", "internet advertisement", and "other". Only one of the values should be allowed to be selected at a time.
         -->
-        <br>
-        <h2>How did you hear about us?</h2>
-        <section>
-            billboard<input name="questionaire" type="radio" value="billboard">
-            radio advertisement<input name="questionaire" type="radio" value="radio">
-            internet advertisement<input name="questionaire" type="radio" value="internet">
-            other<input name="questionaire" type="radio" value="other">
-        </section>
-        <br>
-        <input type="submit">
+    <br>
+    <h2>How did you hear about us?</h2>
+    <section>
+        billboard<input name="questionaire" type="radio" value="billboard">
+        radio advertisement<input name="questionaire" type="radio" value="radio">
+        internet advertisement<input name="questionaire" type="radio" value="internet">
+        other<input name="questionaire" type="radio" value="other">
+    </section>
+    <br>
+    <label for="browser"><h2>What browser are you using?</h2></label>
+    <select name="browser" id="browser">
+        <option value="edge">Edge</option>
+        <option value="opera">Opera</option>
+        <option value="chrome" selected>Chrome</option>
+        <option value="internet explorer">Internet Explorer</option>
+        <option value="firefox">Firefox</option>
+        <option value="escape">Escape</option>
+    </select>
+    <br>
+    <input type="submit">
 
-        <!--
+    <!--
 
 
 
-        Experiment with different attribute values:
-        What do you notice when changing the form's request method from GET to POST? I originally started with a POST request. The          post request sent information to the server that was input. This method is not requesting information to be displayed back to       the user. On the other hand, changing it to a GET request is asking for information to be retrieved from the server and             displayed back to the user. Also, the information that was input is displayed in the web address bar of the browser, posing a       security risk
-        What happens if you leave off the name attribute on an input?
-        The name value is the key that is being transmitted to the server. If it is left out the form would not know what information       is being requested for the server.
-        What happens if you leave off the id attribute on a form input?
-        The input would still be transmitted as normal, but the id gives the name a unique identifier that makes styling easier             later. Also, the text being clicked would not result in the cursor being placed into the coordinating box, because the label        would no longer be attached to the input.
-        --> <!--    Bonus
+    Experiment with different attribute values:
+    What do you notice when changing the form's request method from GET to POST? I originally started with a POST request. The          post request sent information to the server that was input. This method is not requesting information to be displayed back to       the user. On the other hand, changing it to a GET request is asking for information to be retrieved from the server and             displayed back to the user. Also, the information that was input is displayed in the web address bar of the browser, posing a       security risk
+    What happens if you leave off the name attribute on an input?
+    The name value is the key that is being transmitted to the server. If it is left out the form would not know what information       is being requested for the server.
+    What happens if you leave off the id attribute on a form input?
+    The input would still be transmitted as normal, but the id gives the name a unique identifier that makes styling easier             later. Also, the text being clicked would not result in the cursor being placed into the coordinating box, because the label        would no longer be attached to the input.
+    --> <!--    Bonus
         To configure your forms to send you an email, sign up for the free plan on El Formo. El Formo will provide you a URL for your       form's action attribute. When you use this action, the El Formo service will email you each form submission. This is a great        way to get forms working online super quick!-->
-    </body>
+</body>
 </html>
