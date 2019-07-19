@@ -1,12 +1,46 @@
+main section { 
+    text-align: center;
+}
+
 h1 {
-    color: red;
+    text-align: center;
+    font-size: 50px;
+}
+
+p.sub-header {
+    text-align: center;
 
 }
-.fancy-header   {
-         color: blue;
-         text-decoration: underline;
-}
-.fancy-header {
-    color: purple; /* single line comment */
+
+h2 {color: #fff;
     text-decoration: underline;
 }
+
+section ul,ol {
+   display: inline-block;
+    margin: 0 auto;
+    
+}
+
+table {
+    display: inline-block;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 5px 5px;
+}
+.fancy-header   {
+         color: #fff;
+         text-decoration: underline;
+}  
+.background-image {
+    background-image: url("../img/multi-tech.png");
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+p strong, em {
+    color: red;
+}
+
