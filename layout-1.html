@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid Practice 1</title>
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body{
+        margin: 0;
+    }
+
+    main {
+        display: grid;
+        grid-template-rows: 80px 1fr 70px;
+        grid-template-columns: 20% 1fr 15%;
+        grid-template-areas:
+            "header header header"
+            "nav article ads"
+            "nav footer footer";
+        grid-column-gap: 1em;
+        grid-row-gap: 1em;
+        min-height: 100vh;
+    }
+    header, section, footer {
+        padding: 1em;
+        background: #fcd432;
+    }
+
+
+    header {
+        grid-area: header;
+    }
+
+
+    section:nth-of-type(1) {
+        grid-area: 2/1/4/2;
+    }
+
+    section:nth-of-type(2) {
+        grid-area: 2/2/3/3;
+    }
+
+
+    section:nth-of-type(3) {
+        grid-area: 2/3/3/4;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+
+</style>
+
+    <body>
+        <main>
+            <header>Header</header>
+            <section>Nav</section>
+            <section>Article</section>
+            <section>Ads</section>
+            <footer>Footer</footer>
+        </main>
+    </body>
+</html>
