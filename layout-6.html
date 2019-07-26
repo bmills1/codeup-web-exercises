@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid Exercise Example 6</title>
+</head>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+}
+
+main {
+   display: grid;
+    grid-template-rows: 80px 1fr 70px 70px;
+    grid-template-columns: 20% 1fr;
+    grid-template-areas:
+            "header header"
+            "nav article"
+            "nav ads"
+            "footer footer";
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    min-height: 100vh;
+
+}
+
+header, section, footer {
+    padding: 1em;
+    background: #99cd32;
+}
+
+header {
+    grid-area: header;
+}
+
+section:nth-of-type(1) {
+    grid-area: nav;
+}
+
+section:nth-of-type(2) {
+    grid-area: article;
+
+}
+
+section:nth-of-type(3) {
+
+    grid-area: ads;
+}
+
+footer {
+    grid-area: footer;
+}
+</style>
+
+<body>
+
+    <main>
+        <header>Header</header>
+        <section id>Nav</section>
+        <section>Article</section>
+        <section>Ads</section>
+        <footer>Footer</footer>
+    </main>
+
+</body>
+</html>
