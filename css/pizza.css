@@ -1,0 +1,27 @@
+
+.button-color {
+    color: #4a4a4b;
+    border-color: #ced4da;
+}
+
+.bg-cover {
+    background-image: url("../img/pizza.png");
+
+}
+
+h1 {
+    background: rgb(255,255,255);
+    min-width: 100%;
+    line-height: 1.8;
+    font-weight: 400;
+    opacity:.7;
+}
+.card-header:first-child {
+
+    background: rgba(165, 178, 98, 0.8);
+}
+a {
+
+    color: darkgray;
+
+}
