@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inline Functions Exercise</title>
+</head>
+<body>
+
+
+<script>
+    "use strict";
+
+    // ===== MINI PROBLEMS
+
+    // Write a function, returnFive, that returns the number five. No inputs should be defined.
+
+    // You have to write a function that returns the number five
+
+    // pieces of data
+
+    // name of function is "returnFive"
+    // no inputs
+    // output is returns the value of five
+
+    // function returnFive() {
+    //     return 5;
+    // }
+    //
+    // console.log(returnFive());
+
+
+    // Write a function, isFive, that takes in an input and returns the boolean value true if the passed argument is the number 5 or the string "5". Return false otherwise.
+    //Write function
+    //function name isFive
+    //Takes in an input from the user boolean / string / number
+
+    //Output boolean true if the number is the string or number is equal to five
+    // Output boolean false if the number is greater than or less than five or any other string or boolean
+
+    function isFive(input) {
+
+        return input == 5;
+    }
+
+    // Test
+    console.log(isFive("5"));
+    console.log(isFive("10"));
+
+    // Write a function, isShortWord, that takes in a string and returns the boolean value true if the passed argument is shorter than 5 characters. Return false otherwise.
+    //Takes one string
+    //boolean output
+
+    function isShortWord(input) {
+
+       return  input.length < 5;
+
+    }
+    //Test
+    console.log(isShortWord("Lo"));
+    console.log(isShortWord("London"));
+
+
+    // Write a function, isSameLength, that takes in two string inputs and returns the boolean value true if the passed arguments are the same length. Return false otherwise.
+    // Two inputs that are strings
+    function isSameLength (input1, input2){
+        return input1.length === input2.length;
+    }
+    //Test
+    console.log(isSameLength("aaaaa", "bbbbb"));
+    console.log(isSameLength("aaaaa", "bbb"));
+
+    // Write a function, getSmallerSegment, that takes in a string and a number input. The function should return a substring of the first argument that is as many characters long as the second argument in lowercase.
+    // inputs : string, number
+    // output: string
+    function getSmallerSegment (str, num){
+        return str.substring(0, num).toLowerCase();
+    }
+    //Test
+    console.log(getSmallerSegment("Bridget", 2));
+</script>
+</body>
+</html>
