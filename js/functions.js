@@ -1,3 +1,5 @@
+(function(){
+
 "use strict";
 
 
@@ -137,3 +139,4 @@ alert ("The amount you should tip on your bill is $" + calculateTip(billTotal, t
 
  }
  console.log(applyDiscount(45.99, 0.12)), 40.4712;
+})();
