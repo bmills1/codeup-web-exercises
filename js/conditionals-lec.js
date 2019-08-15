@@ -37,14 +37,14 @@ if(walkingToday){
     alert ("Guess I'm driving.")
 
 }
-/* if else if else */
-if(condition){
-
-} else if {
-
-} else {
-
-    }
+// /* if else if else */
+// if(condition){
+//
+// } else if {
+//
+// } else {
+//
+//     }
 
 var pizzaPreference = prompt("What kind of pizza do you like?");
     console.log("User input" + pizzaPreference)
@@ -76,7 +76,7 @@ if (pizzaPreference === "pineapple and hot sauce") {
 /* Ternary*/
     'use strict';
     var success = false;
-    var message;
+    // var message;
 
     // if (success) {
     //     message = "Operation was successful.";
@@ -85,7 +85,7 @@ if (pizzaPreference === "pineapple and hot sauce") {
     // }
 
 // ternary //
-(success) ? "Operation was successful." : "Oops, something went wrong.";
+// (success) ? "Operation was successful." : "Oops, something went wrong.";
 
 // the above if/else can be re-written as:
     var message = (success) ? "Operation was successful." : "Oops, something went wrong.";
@@ -94,7 +94,7 @@ if (pizzaPreference === "pineapple and hot sauce") {
 
 /* Switch Statements*/
 
-var pizzaPreference = prompt("What kind of pizza do you like?");
+// var pizzaPreference = prompt("What kind of pizza do you like?");
 
 switch(pizzaPreference) {
     case "pineapple and hot sauce":
