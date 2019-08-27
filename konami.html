@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+<!--//////////////CSS///////////////-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /*#myVideo{*/
+        /*    display:flex;*/
+        /*    justify-content: center;*/
+        /*}*/
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+            font-size: 100px;
+        }
+        .div1 { grid-area: 1 / 3 / 2 / 4;}
+        .div2 { grid-area: 2 / 2 / 3 / 3; }
+        .div3 { grid-area: 3 / 3 / 4 / 4; }
+        .div4 { grid-area: 2 / 4 / 3 / 5; }
+
+        #myVideo{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<main class="container">
+
+    <h1>Konami Code</h1>
+    <!--///////////////VIDEO//////////////////-->
+    <video id="myVideo" width="320" height="176" class="mx-auto">
+        <source src="img/sampVid.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <!--//////////ARROWS//////////////////////////-->
+    <div class="parent">
+        <div class="div1">&#9650</div>
+        <div class="div2">&#x25C0</div>
+        <div class="div3">&#9660</div>
+        <div class="div4">&#9654</div>
+    </div>
+</main>
+
+<!--//////////////JAVASCRIPT////////////////-->
+<script src="js/jquery-2.2.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    "use strict";
+///////HIDE VIDEO ON INITIAL LOAD////
+    $("#myVideo").hide();
+
+//////VARIABLE TO CAPTURE USER SEQUENCE ENTERED/////
+var userInput = "";
+
+
+
+$(document).keyup(function(event) {
+
+    var sequence = "38384040373937396665";
+    if(event.keyCode === 13){
+        if(userInput.includes(sequence)){
+            $('.parent').hide();
+            $("#myVideo").show().on('ended',function(){ $(this).hide(); });
+            playVid();
+        }else{
+            alert('You lose!')
+        }
+    }else{
+        userInput += event.keyCode;
+        console.log(userInput);
+    }
+
+    for(var i = 0; i < userInput.length; i++){
+        if(userInput[i].indexOf('38')){
+           $('.div1').css('color', 'red').off();
+        }else{
+        }
+    }
+    // if(userInput.includes(38)){
+    //     $('.div1').on('keyup', function() {
+    //         $(this).css('color', 'red');
+    //     });
+    //
+    // }
+
+
+});
+////////GETS THE VIDEO ELEMENT AND STORES TO VARIABLE////
+    var vid = document.getElementById("myVideo");
+/////FUNCTION TO PLAY VIDEO///////
+    function playVid() {
+        vid.play();
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
