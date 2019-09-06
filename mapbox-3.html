@@ -9,6 +9,7 @@
 
 <div id='map' style='width: 100%; height: 600px;'></div>
 <script src ="js/keys.js"></script>
+<script src ="js/mapbox-utils.js"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.js'></script>
 <script>
     mapboxgl.accessToken = mapboxToken;
@@ -27,6 +28,10 @@
         .setLngLat([-77.0502, 38.8893])
         .addTo(map)
         .togglePopup();
+
+    // geocode("600 Navarro St #350, San Antonio, TX 78205", mapboxToken).then(function(result){
+    //     console.log(result);
+    // });
 
 </script>
 

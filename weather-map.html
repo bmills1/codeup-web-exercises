@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel='stylesheet'
+          href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css'
+          type='text/css'/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-size: cover;
+            background-image: url("img/sunny-day.jpg");
+            background-repeat: no-repeat;
+        }
+
+        div {
+            font-size: 12px;
+        }
+
+        .container{
+            display: grid;
+            align-items: stretch;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+        }
+        .mapbox-gl-canvas{
+
+            width: 620px;
+            height: 400px;
+            margin-left: 2em;
+            margin-top: 3.5em;
+        }
+        #map { grid-area: 1 / 1 / 3 / 4; }
+        #current-weather { grid-area: 3 / 1 / 6 / 4; }
+        #daily-temps { grid-area: 1 / 4 / 6 / 6; }
+
+
+    </style>
+
+</head>
+
+
+
+<body>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
+
+<div class="container">
+    <div class="card-body mb-3 text-center" id="current-weather">
+        <div></div>
+    </div>
+    <div class=" card-body mb-3 text-center" id="daily-temps" style=' height: 23rem;'>
+        <div class='card-body pt-20' ></div>
+    </div>
+
+    <div class="card mb-2 shadow-sm ml-4 mt-5" id='map' style='width: 620px; height: 430px;' >
+    </div>
+    <pre id='coordinates' class='coordinates'></pre>
+</div>
+<div><img src="https://fontmeme.com/permalink/190905/3b6090a800cc10f657df1da4b3e01879.png" alt=""></div>
+
+<script src="js/jquery-2.2.4.js"></script>
+<script src='js/keys.js'></script>
+<script src='js/mapbox-utils.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.0/mapbox-gl.css' rel='stylesheet' />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+//ajax request
+    $.get("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyKey + "/29.42412,-98.49363").done(function (info) {
+        console.log(info);
+
+        var htmlStr = '';
+        var currentStr='';
+        var weatherIcons = [
+            {
+                icon: 'clear-day',
+                image: "icon/Sun.svg",
+                background: "img/sunny-day.jpg"
+            },
+            {
+                icon: 'clear-night',
+                image:'icon/Moon.svg'
+            },
+            {
+                icon: 'rain',
+                image:'icon/Cloud-Rain.svg',
+                background: "img/rain-background.gif"
+            },
+            {
+                icon: 'snow',
+                image:'icon/Snowflake.svg'
+            },
+            {
+                icon: 'sleet',
+                image:'icon/Snowflake.svg'
+            },
+            {
+                icon: 'wind',
+                image:'icon/Wind.svg'
+            },
+            {
+                icon:'fog',
+                image:'icon/Cloud-Fog-Sun.svg'
+            },
+            {
+                icon:'cloudy',
+                image:'icon/Cloud.svg'
+            },
+            {
+                icon: 'partly-cloudy-day',
+                image:'icon/Sun.svg'
+            },
+            {
+                icon: 'partly-cloudy-night',
+                image:'icon/Cloud-Moon.svg'
+            }
+        ];
+
+
+        function iconCheck(weatherIcons, info){
+            console.log(info);
+            console.log(weatherIcons);
+            for (var i = 0; i < weatherIcons.length; i++) {
+                if (info === weatherIcons[i].icon) {
+                    return weatherIcons[i].image;
+                    // backgroundImage = weatherIcons[i].background;
+
+                }
+            }
+        }
+
+/////////////////////////////////display current weather//////////////////////
+    function displayCurrentTemp(info){
+        currentStr='';
+        var currentTemperature =Math.round(info.currently.apparentTemperature);
+        var currentHumidity = info.currently.humidity *100;
+        var currentWind = Math.round(info.currently.windSpeed);
+        var currentPressure = Math.round(info.currently.pressure);
+        currentStr += "<div class ='card mb-3 shadow-sm'>";
+        currentStr += "<div><img src='" + iconCheck( weatherIcons, info.currently.icon) + "'></div>";
+        currentStr += "<h3>CURRENTLY</h3>";
+        currentStr += "<div>Current Temp: " +currentTemperature+"</div>";
+        currentStr += "<div>Description: "+info.currently.summary+"</div>";
+        currentStr += "<div>Hunidity: "+currentHumidity+"</div>";
+        currentStr += "<div>Windspeed: "+currentWind+"</div>";
+        currentStr += "<div>Pressure: "+currentPressure+"</div>";
+        currentStr += "</div>";
+
+
+    };
+    displayCurrentTemp(info);
+
+//////////////////////////display of three day weather//////////////////////////////
+    function threeDayWeather(info) {
+        console.log(info);
+        htmlStr='';
+        for (var j = 0; j <= 2; j++) {
+
+            var date = new Date(info.daily.data[j].time * 1000 + 3600000).toDateString();
+            var tempHigh = Math.round(info.daily.data[j].temperatureHigh);
+            var tempLow = Math.round(info.daily.data[j].temperatureLow);
+            var dayDescription = info.daily.data[j].icon;
+            var humidity = Math.round(info.daily.data[j].humidity * 100);
+            var wind = Math.round(info.daily.data[j].windSpeed);
+            var pressure = Math.round(info.daily.data[j].pressure);
+////////////////display the icons for the three day array////////////////////////////////////////////
+
+            htmlStr += "<div class ='card mb-3 shadow-sm  card h-75 mp-0'>";
+            htmlStr += "<section>";
+            htmlStr += "      <div><img src='" + iconCheck( weatherIcons, info.daily.data[j].icon) + "'></div>";
+            htmlStr += "<div style= 'margin-top: -15px'><small>TEMP HIGH </small>" + tempHigh + "</div>";
+            htmlStr += "<h2 class ='mb-0'>" + date + "</h2>";
+            htmlStr += "<div><small>TEMP LOW </small>" + tempLow + "</div>";
+            htmlStr += "<div><small>DESCRIPTION </small>" + dayDescription + "</div>";
+            htmlStr += "<div><small>HUNIDITY </small>" + humidity + "</div>";
+            htmlStr += "<div><small>WIND SPEED </small>" + wind + "</div>";
+            htmlStr += "<div><small>PRESSURE </small>" + pressure + "</div>";
+            htmlStr += "</section>";
+            htmlStr += "</div>";
+        }
+
+    }
+        threeDayWeather(info);
+
+
+
+    $('input').keyup(function(e) {
+        if (e.keyCode == 13) {
+            address = $(this).val();
+            console.log(address);
+            geocode(address, mapboxToken).then(function (result) {
+                longitude = (result[0]).toString();
+                console.log(longitude);
+                latitude = (result[1]).toString();
+                console.log(latitude);
+
+            });
+        }
+    });
+
+
+    $('#current-weather').html(currentStr);
+    $('#daily-temps').append(htmlStr);
+
+
+
+        ///mapbox to  search for location
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYnJpZGdldG1pbGxzIiwiYSI6ImNqemloYXVlazEzZGQzY3BoeTJ5N2xicmEifQ.c8m3gGOrooUHDV7g_frHMA';
+        var longitude ='';
+        var latitude ='';
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-84.3880, 33.7490],
+            zoom: 9
+        });
+
+        var marker = new mapboxgl.Marker({
+            draggable: true
+        })
+            .setLngLat([-84.3880, 33.7490])
+            .addTo(map);
+//
+
+
+        var geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            // mapboxgl: mapboxgl
+        });
+
+        map.on("moveend", function() {
+            marker.setLngLat(map.getCenter());
+            onDragEnd()
+        });
+
+        map.addControl(geocoder);
+
+
+        function onDragEnd() {
+            var lngLat = marker.getLngLat();
+            coordinates.style.display = 'block';
+            longitude=lngLat.lng;
+            latitude=lngLat.lat;
+            // coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+
+
+
+            $.get("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyKey + "/"+latitude+","+longitude+"").done(function (update) {
+
+                displayCurrentTemp(update);
+                threeDayWeather(update);
+                $('#current-weather').html(currentStr);
+                $('#daily-temps').html(htmlStr);
+
+
+            });
+
+        }
+
+        marker.on('dragend', onDragEnd)
+
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+// navigator.geolocation.getCurrentPosition(function(position) {
+//     console.log(position.coords.latitude, position.coords.longitude);
+// });
+
+
+
+
+        // ///function calls
+
+        // threeDayDates();
+        // highTemp();
+        // lowTemp();
+
+
+
+
+
+    ///convert  currently property... time property into date
+    // var date = new Date(time property in api)....this will give wrong date
+    ///multiply this number times 1000 for correct date
+    //var date = new Date(time  property in api * 1000)
+    //makes the date correct and human readable
+
+
+    //to retrieve each new date
+    // info.daily.data.forEach(function(data){
+    //     var date = new Date(data.time * 1000);
+    //     console.log(date);
+    // })
+
+    // var accessToken = mapboxToken;
+    // mapboxgl.accessToken = accessToken;
+    // var map = new mapboxgl.Map({
+    //     container: 'map',
+    //     style: 'mapbox://styles/mapbox/streets-v9',
+    //     zoom: 10,
+    //     center: [-98.4916, 29.4252]
+    // });
+// <!--    <section>-->
+// <!--        <h2>Date</h2>-->
+// <!--        <div>Icon</div>-->
+// <!--        <div>High Temp</div>-->
+// <!--        <div>Temperature</div>-->
+// <!--        <div>Low Temp</div>-->
+// <!--        <div>Clouds</div>-->
+// <!--        <div>Humidity</div>-->
+// <!--        <div>Wind</div>-->
+// <!--        <div>Pressure</div>-->
+// <!--    </section>-->
+
+// <!--    <h3>TODAY</h3>-->
+// <!--    <div>Icon</div>-->
+// <!--    <div>Temperature</div>-->
+// <!--    <div>Description</div>-->
+// <!--    <div>Humidity</div>&ndash;&gt;-->
+// <!--    <div>Wind</div>-->
+// <!--    <div>Pressure</div>-->
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>My Ajax Blog</h1>
+
+<div id="posts">
+    <h2></h2>
+    <p></p>
+    <p></p>
+    <p></p>
+
+</div>
+
+
+<script src="js/jquery-2.2.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    (function() {
+        "use strict";
+        // TODO: Create an ajax GET request for /data/inventory.json
+            $.ajax('data/blog.json').done(function (data) {
+                var htmlStr = '';
+                data.forEach(function (blog) {
+                    htmlStr += "<div>";
+                    htmlStr += "<h2>" + blog.title + "</h2>";
+                    htmlStr += "<p>" + blog.content + "</p>";
+                    htmlStr += "<p>" + blog.categories + "</p>";
+                    htmlStr += "<p>" + blog.date + "</p>";
+                    htmlStr += "</div>";
+                });
+
+
+                // TODO: Take the data from inventory.json and append it to the products table
+
+                $('#posts').html(htmlStr);
+
+
+            });
+
+
+
+
+
+        //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+        //             its contents and fields
+        //       HINT: You will want to target #insertProducts for your new HTML elements
+    })();
+
+
+</script>
+
+</body>
+</html>

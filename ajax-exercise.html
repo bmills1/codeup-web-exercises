@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+</head>
+<body>
+
+
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+
+
+    ///update with button this ajax
+    ///wrap in a function called updatePage assigned to the button id
+$.ajax('data/orders.json').done(function(data){
+    data.forEach(function(item){
+        console.log(item.itemOrdered);
+    });
+    var htmlStr= '';
+    data.forEach(function(item){
+        htmlStr += '<p>' + item.itemOrdered +  '</p>'
+    });
+
+
+
+    htmlStr += '<p>' data[0].itemOrdered +  '</p>'
+
+
+    // data.forEach(function(order, i){
+    //   '<section>';
+    //     '<h3>'Order #
+    //
+    //   '</section>';
+    //
+    // });
+
+
+
+    $(body).html('<p>' +item.itemOrdered +  '</p>');
+    ///refactored to
+    $(body).html(htmlStr);
+    //instead of body, can change the body to be id of whatever section needs to be changed
+    $('orders'.html(htmlStr);
+});
+// button id then function surrounding ajax
+// $('#update;).click(updatePage)
+
+</script>
+</body>
+</html>
