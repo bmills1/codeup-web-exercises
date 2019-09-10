@@ -89,13 +89,24 @@
 
         // PROBLEM 1 - create an array of the first letters of each fruit
 
+        let firstFruitLetter = fruits.map((fruit) => fruit.charAt(0));
+        console.log(firstFruitLetter);
+
         // PROBLEM 2 - create array of user objects based on the customers array
         // of objects (each user object should just have name and age properties)
+        const nameAge = customers.map((customer) => ({customer: customer.name, age: customer.age}));
+        console.log(nameAge);
 
         // PROBLEM 3 - create an array of civil servant customers (teachers and police officers)
         // containing the same properties as the objects on the customers objects
+        const civilServant = customers.filter((customer) => (customer.occupation === 'Teacher' || customer.occupation === 'Police Officer')
+        );
+        console.log(civilServant);
 
         // PROBLEM 4 - determine the average age of customers
+
+        const totalCustomersAge =  customers.reduce((total, customer)=>  total +  customer.age, 0);
+        console.log(totalCustomersAge/customers.length);
 
         // PROBLEM 5 - create a function makeSuperPet() that takes in the pets array as input and returns a single pet object
         // with the following shape...
@@ -108,6 +119,28 @@
             }
 
          */
+        // for(const pet of pets){
+        //     let{name, age, breed} = pet;
+        // }
+
+
+        // pets.reduce((totalAges, pet)=> totalAges + pet.age, 0);
+        //
+        // let makeSuperPet = (arr) => {
+        //     pets.map((pet)=>({name: pet.name, age: pet.reduce((totalAges, pet)=> totalAges + pet.age, 0), breed: pet.breed}));
+        //
+        // };
+
+        name: pets.reduce((allPets, pet)=> allPets += pet.name + " ,"),
+         age: pets.reduce((totalAges, pet)=> totalAges + pet.age, 0),
+        breed: petsreduce((all))
+
+
+        var petObject =pets.map((pet)=>({name: pet.name, age: pets.reduce((totalAges, pet)=> totalAges + pet.age, 0), breed: pet.breed}));
+        console.log(petObject);
+        // console.log(makeSuperPet());
+
+
 
         // PROBLEM 6 - take in an array of pets and return an array of the length of first names for pugs only
         // your output for the given input should be [3, 6] for 'Bud' and 'Bowser'

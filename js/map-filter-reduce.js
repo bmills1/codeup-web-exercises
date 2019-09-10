@@ -39,28 +39,49 @@ const users = [
 //
 // Use .filter to create an array of user objects where each user object has at least 3 languages in the languages array.
 
-users.filter((user)=> user.languages.length >= 3 );
+const highLanguages = users.filter((user)=> user.languages.length >= 3 );
+console.log(highLanguages);
 
 
 //     Use .map to create an array of strings where each element is a user's email address
-users.map((user)=> user.email);
+let userEmails = users.map((user)=> user.email);
+console.log(userEmails);
 
 // Use .reduce to get the total years of experience from the list of users. Once you get the total of years you can use the result to calculate the average.
-let totalExperience =users.reduce((totalExp, numYears) => totalExp + numYears.yearsOfExperience, 0);
+let totalExperience =users.reduce((totalExp, user) => totalExp + user.yearsOfExperience, 0);
 console.log(totalExperience);
 console.log(totalExperience/users.length);
 
-const longestEmail = users.reduce((longestEmail, user) => longestEmail.email.length >= user.email.length ? longestEmail : user);
+let longestEmail = users.reduce((longestEmail, user)=> {
+    if(longestEmail.length< user.email.length){
+        longestEmail =user.email
+    }
+    return longestEmail;
+}, '');
 console.log(longestEmail);
+
 //     Use .reduce to get the list of user's names in a single string. Example: Your instructors are: ryan, luis, zach, fernando, justin.
 
-const instructorsList = users.reduce((finalString, user) => finalString + `${user.name}` + `, `
-    , 'Your instructors are:');
-console.log(instructorsList.slice(0,-2));
+const instructorsList = users.reduce((sentence, user, i) => {
+    if(i < users.length-1) {
+        sentence += user.name + ", ";
+    }else{
+        sentence += `and ${user.name}.`
+    }
+    return sentence
+    }
+    , 'Your instructors are: ');
+console.log(instructorsList);
 
 // Use .reduce to get the unique list of languages from the list of users.
+// const uniqueLang = users.reduce((listOfLangs), user) => {
+//     for (const lang of user.languages){
+//         if(listOfLangs.indexOf(lang)===-1){
+//             listOfLangs.push(lang)
+//         }
+//     }
+//     return listOfLangs
+//
+// }, []);
 
-// users.filter((languagee)=> {
-//     if(language.indexOf())
-// })
 
